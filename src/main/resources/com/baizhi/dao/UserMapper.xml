@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+	namespace:写当前mapper文件对应的dao接口的全类名
+ -->
+<mapper namespace="com.baizhi.dao.UserDao">
+    <select id="selectAll" resultType="User">
+  select * from  user
+</select>
+
+<!--
+
+    <insert id="insert">
+    insert into user values(#{id},#{username},#{password})
+  </insert>
+    <update id="update">
+    update user set username=#{username},password=#{password}  where id=#{id}
+  </update>
+    <delete id="deleteMany">
+        delete from user where id in
+        <foreach collection="array" open="(" close=")"
+                 separator="," item="id"
+        >#{id}
+        </foreach>
+    </delete>
+-->
+
+
+</mapper>

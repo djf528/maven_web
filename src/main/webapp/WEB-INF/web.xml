@@ -1,0 +1,61 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>Archetype Created Web Application</display-name>
+    <!-- 首先配置spring -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+    <!-- 解决 from表单post提交方式时乱码问题 -->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
+    <!-- 通过Servlet标签配置SpringMVC的核心过滤器 -->
+    <servlet>
+        <servlet-name>mvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 1.默认到WEB-INF下加载SpringMVC配置文件 2.默认的配置文件的名字为<servlet-name>-servlet.xml;这里SpringMVC-servlet.xml -->
+       <!--加载mvc文件本身是和web.xml文件在一块的，加这个是其主动的到resources下面去还在-->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:applicationContext.xml</param-value>
+        </init-param>
+        <!--自动加载 -->
+        <load-on-startup>1</load-on-startup>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>mvc</servlet-name>
+        <url-pattern>*.do</url-pattern>
+        <!-- url-pattern标签的内容的四种写法:
+        1.模糊匹配 /*
+        2.目录匹配 /user/*
+        3.精确匹配 /UserServlet
+        4.后缀匹配 *.do -->
+    </servlet-mapping>
+
+
+</web-app>
